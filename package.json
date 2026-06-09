@@ -1,6 +1,6 @@
 {
   "name": "squadia-poc-autoupdate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "POC validando pipeline end-to-end de auto-update para o SquadIA 4.0 (Blue Tecnology)",
   "main": "main.js",
   "author": {
