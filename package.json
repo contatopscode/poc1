@@ -34,8 +34,7 @@
       {
         "provider": "github",
         "owner": "contatopscode",
-        "repo": "poc-squadia",
-        "private": true,
+        "repo": "poc1",
         "releaseType": "release"
       }
     ],

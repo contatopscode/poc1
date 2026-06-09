@@ -2,7 +2,7 @@
 
 POC para validar o pipeline end-to-end de auto-update do **SquadIA 4.0** antes de aplicar no app real.
 
-**Stack**: Electron 34 + electron-updater + GitHub Releases privado (`contatopscode/poc-squadia`)
+**Stack**: Electron 34 + electron-updater + GitHub Releases público (`contatopscode/poc1`)
 **Objetivo**: provar que `git tag → GitHub Action → update silencioso na máquina do dev` funciona em Windows/Mac/Linux.
 
 ---
@@ -20,10 +20,10 @@ Tudo isso entra depois que o mecanismo de update for validado aqui.
 
 ## Setup inicial (uma vez)
 
-### 1. Criar o repo privado no GitHub
+### 1. Criar o repo público no GitHub
 
 ```bash
-# Já criado: https://github.com/contatopscode/poc-squadia
+# Já criado: https://github.com/contatopscode/poc1
 ```
 
 ### 2. Configurar git local
@@ -34,7 +34,7 @@ git init
 git add .
 git commit -m "feat: initial POC scaffolding"
 git branch -M main
-git remote add origin https://github.com/contatopscode/poc-squadia.git
+git remote add origin https://github.com/contatopscode/poc1.git
 git push -u origin main
 ```
 
@@ -167,10 +167,11 @@ Rode `npm install` novamente.
 
 ### "404 Not Found" ao verificar update
 
-O repo `contatopscode/poc-squadia` é privado. O electron-updater precisa do GitHub token quando o repo é privado. Soluções:
+Normalmente significa:
 
-1. **Mais simples para POC**: tornar o repo público (revisar antes de fazer)
-2. **Produção**: usar `private: true` na config + GH_TOKEN no app via variável de ambiente ou config criptografada
+1. Ainda não há release publicada no `contatopscode/poc1` (precisa ter pelo menos `v1.0.0` publicada antes que o updater encontre algo)
+2. O nome do repo no `package.json` (`build.publish.repo`) não bate com o nome real no GitHub
+3. Em **produção** (repo privado): faltam credenciais. Usar `GH_TOKEN` via variável de ambiente ou config criptografada
 
 ### Windows: "SmartScreen impediu a execução"
 
@@ -193,7 +194,7 @@ Na fase 2 com Apple Developer + notarização, esse problema some.
 1. **Code signing Windows**: comprar cert EV (~$300-500/ano)
 2. **Apple Developer Program**: $99/ano + configurar notarização no workflow
 3. **Migrar a stack real**: trazer Next.js 16 + Claude SDK pra dentro deste shell Electron
-4. **Repo de releases separado**: criar `contatopscode/squadia-releases` (privado) só pros binários, mantendo o código fonte em outro repo
+4. **Repo de releases privado**: migrar do `poc1` público pra um repo privado (`contatopscode/squadia-releases`) com `GH_TOKEN` configurado, mantendo o código fonte em outro repo
 5. **Intune integration**: empacotar o MSI como Win32 app no Intune e empurrar pro AD group "SquadIA"
 6. **Backend central**: subir Redis + node-cron num servidor interno Blue
 
