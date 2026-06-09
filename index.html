@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+    <title>SquadIA POC — Auto Update</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div class="brand">
+          <div class="logo">S</div>
+          <div>
+            <h1>SquadIA POC</h1>
+            <p class="subtitle">Pipeline de auto-update — Blue Tecnology</p>
+          </div>
+        </div>
+        <div class="version-badge" id="versionBadge">v—</div>
+      </header>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Status</h2>
+          <span class="status-dot" id="statusDot" data-status="idle"></span>
+        </div>
+        <div class="status-box">
+          <p class="status-label" id="statusLabel">Aguardando verificação…</p>
+          <div class="progress-wrap" id="progressWrap" hidden>
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <p class="status-detail" id="statusDetail"></p>
+        </div>
+
+        <div class="actions">
+          <button id="checkBtn" class="btn btn-primary">
+            Verificar atualização
+          </button>
+          <button id="installBtn" class="btn btn-success" hidden>
+            Reiniciar e instalar
+          </button>
+        </div>
+      </section>
+
+      <section class="card meta">
+        <h3>Ambiente</h3>
+        <dl class="meta-list">
+          <div>
+            <dt>Versão</dt>
+            <dd id="metaVersion">—</dd>
+          </div>
+          <div>
+            <dt>Plataforma</dt>
+            <dd id="metaPlatform">—</dd>
+          </div>
+          <div>
+            <dt>Arquitetura</dt>
+            <dd id="metaArch">—</dd>
+          </div>
+          <div>
+            <dt>Electron</dt>
+            <dd id="metaElectron">—</dd>
+          </div>
+          <div>
+            <dt>Node</dt>
+            <dd id="metaNode">—</dd>
+          </div>
+          <div>
+            <dt>Chrome</dt>
+            <dd id="metaChrome">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <footer class="footer">
+        <p>
+          POC validando GitHub Releases privado
+          (<code>contatopscode/poc-squadia</code>) + electron-updater.
+        </p>
+      </footer>
+    </main>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

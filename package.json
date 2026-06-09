@@ -1,0 +1,105 @@
+{
+  "name": "squadia-poc-autoupdate",
+  "version": "1.0.0",
+  "description": "POC validando pipeline end-to-end de auto-update para o SquadIA 4.0 (Blue Tecnology)",
+  "main": "main.js",
+  "author": {
+    "name": "Blue Tecnology",
+    "email": "contato@bluetecnology.com.br"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux",
+    "release": "electron-builder --publish always",
+    "draft": "electron-builder --publish always -c.publish.releaseType=draft"
+  },
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "electron-log": "^5.2.0",
+    "electron-updater": "^6.3.9"
+  },
+  "build": {
+    "appId": "br.com.bluetecnology.squadia.poc",
+    "productName": "SquadIA POC",
+    "copyright": "Copyright (c) 2026 Blue Tecnology",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "contatopscode",
+        "repo": "poc-squadia",
+        "private": true,
+        "releaseType": "release"
+      }
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "styles.css",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "shortcutName": "SquadIA POC"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.developer-tools",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Development",
+      "artifactName": "${productName}-${version}.${ext}"
+    }
+  }
+}
